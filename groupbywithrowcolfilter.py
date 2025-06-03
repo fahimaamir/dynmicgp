@@ -27,6 +27,7 @@ from collections import defaultdict
 from st_aggrid import AgGrid, GridOptionsBuilder
 
 
+
 def generate_sales_data():
         """Generate dataset simulating sales data."""
         np.random.seed(42)
@@ -144,4 +145,13 @@ if st.button('Pivot Table'):
     #df3 = mfa4.pivot(index=value1, columns=value2 ,values=value3,aggfunc='sum')
     #os.remove('pivott.csv') 
     st.write(muhammad)
-    muhammad.to_csv('pivott.csv')
+    pcsv = muhammad.to_csv(index=True).encode('utf-8')
+    #pcsv = muhammad.to_csv().encode('utf-8')
+    
+    #csv = convert_df(pcsv)
+
+    st.download_button(
+        label="Pivot data as CSV",
+        data=pcsv,
+        file_name='pivottable.csv',
+        mime='text/csv',         )
